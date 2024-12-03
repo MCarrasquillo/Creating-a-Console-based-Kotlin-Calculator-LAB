@@ -1,55 +1,70 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    while(true) {
-        print("Welcome to your calculator: \n")
-        print("To exit type exit\n")
-        print("Please enter first number: ")
-        val num1 = readLine()?.toDoubleOrNull()
+    while (true) {
+        println("Welcome to your calculator: \n")
+        println("To exit, type 'exit'\n")
 
-        if (num1.toString() == "exit"){
-            break
-        }
+        // usuario ingresa primer valor
+        print("Please enter the first number: ")
+        val input1 = readLine()
+        if (input1?.lowercase() == "exit") break
+        val num1 = input1?.toDoubleOrNull()
         if (num1 == null) {
-            println("value entered must be a number")
-            return
+            println("Value entered must be a number\n")
+            continue
         }
-        print("please enter operation( + , - , / , *):  ")
+
+        // Get the operation
+        print("Please enter operation (+, -, *, /): ")
         val operation = readLine()
-        if (operation == "exit"){
-            break
+        if (operation?.lowercase() == "exit") break
+        if (operation !in listOf("+", "-", "*", "/")) {
+            println("Invalid operation. Must be one of (+, -, *, /)\n")
+            continue
         }
-        print("Please enter second number: ")
-        val num2 = readLine()?.toDoubleOrNull()
-        if (num2.toString() == "exit"){
-            break
-        }
+
+        // usuario ingresa segundo valor
+        print("Please enter the second number: ")
+        val input2 = readLine()
+        if (input2?.lowercase() == "exit") break
+        val num2 = input2?.toDoubleOrNull()
         if (num2 == null) {
-            println("Value entered must be a number")
-            return
+            println("Value entered must be a number\n")
+            continue
         }
 
+        // Validacion de no poder sumar entre 0
         if (operation == "/" && num2 == 0.0) {
-            print("You cannot divide by 0")
-            return
+            println("Error: Division by zero is not allowed\n")
+            continue
         }
 
+        // Calculacion de el resultado
         val result = when (operation) {
             "+" -> num1 + num2
             "-" -> num1 - num2
-            "/" -> num1 / num2
             "*" -> num1 * num2
-            else -> null
+            "/" -> num1 / num2
+            else -> null // This case should never occur
         }
+
+        // Demostramos el resultado
         if (result != null) {
             print("--------------------------\n")
             print(String.format(result.toString()))
             print("\n--------------------------\n")
         }
-
         else {
             print("Error: operation must be on of these ( + , - , / , *)")
         }
     }
-
+    println("Exited successfully\n")
+    println("Goodbye!")
 }
+
+
+
+
+
+
+
+
